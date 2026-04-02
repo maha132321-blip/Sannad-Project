@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة الدكتور</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f7f6; margin: 0; display: flex; }
+        .sidebar { width: 250px; background: #2c3e50; color: white; height: 100vh; padding: 20px; position: fixed; }
+        .main { margin-right: 250px; padding: 30px; width: 100%; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { padding: 15px; border-bottom: 1px solid #eee; text-align: right; }
+        .status-low { background: #f8d7da; color: #721c24; padding: 5px; border-radius: 5px; }
+        .status-high { background: #d4edda; color: #155724; padding: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar"><h2>👨‍🏫 بوابة الدكتور</h2></div>
+    <div class="main">
+        <h1>قائمة أداء الطلاب من ملف الإكسل</h1>
+        <table>
+            <thead>
+                <tr><th>الاسم</th><th>الرقم الجامعي</th><th>النسبة</th><th>الحالة</th></tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student['Name'] }}</td>
+                    <td>{{ student['ID'] }}</td>
+                    <td>{{ student['Score'] }}%</td>
+                    <td>
+                        {% if student['Score'] < 50 %}
+                        <span class="status-low">🚨 خطر تعثر</span>
+                        {% else %}
+                        <span class="status-high">✅ مستقر</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
